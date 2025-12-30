@@ -6,7 +6,7 @@ window.CONFIG = {
 
   description: "Test how well you recognize NFL players. One attempt per face.",
 
-  datasetUrl: "", // we’ll add this next
+  datasetUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTV4PjFbv-M_K_InwKSbE1daaGaf3Y0KGCTuUqPTud4wL1Iedibf8LxoNkgHHhWZj27Ylr-EVlO1Cgp/pub?output=csv",
 
   totalPerRound: 20,
   pointsPerCorrect: 10,

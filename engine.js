@@ -30,7 +30,11 @@ function parseCSV(csv) {
   return rows.map(r => {
     let o = {};
     headers.forEach((k, i) => o[k] = (r[i] || "").trim());
-    return { name: o.full_name, conf: Number(o.confidence_level) };
+    return {
+      name: o.full_name,
+      aliases: o.aliases || "",
+      conf: Number(o.confidence_level)
+    };
   }).filter(x => x.name);
 }
 
@@ -89,28 +93,28 @@ function submitGuess() {
   const normalizedGuess = normalizeString(guess);
   const normalizedCorrect = normalizeString(correctName);
   
-  if (isCloseEnough(guess, correctName)) {
-    score += 10;
+  const aliases = round[idx].aliases || "";
+
+  if (matchesNameOrAlias(guess, correctName, aliases)) {
+
+    score += 1;
   
-    if (normalizedGuess === normalizedCorrect) {
-      feedback.innerText = "Correct! +10 points";
-    } else {
-      feedback.innerHTML = `Correct!<br><span class="small">${correctName}</span>`;
-    }
-  
+    feedback.innerHTML = `Correct!<br><span class="small">${correctName}</span>`;
     feedback.className = "correct";
+  
     gtag('event','submit_correct');
   } else {
-    feedback.innerText = `Incorrect. Correct answer: ${correctName}`;
+    feedback.innerHTML = `Incorrect!<br><span class="small">${correctName}</span>`;
     feedback.className = "incorrect";
+  
     gtag('event','submit_incorrect');
   }
-
   setTimeout(nextFace,1200);
 }
 
 function skip() {
-  feedback.innerText = `Incorrect. Correct answer: ${round[idx].name}`;
+  const correctName = round[idx].name;
+  feedback.innerHTML = `Incorrect!<br><span class="small">${correctName}</span>`;
   feedback.className = "incorrect";
   gtag('event','skip_face');
   setTimeout(nextFace,1200);
@@ -212,4 +216,17 @@ function isCloseEnough(input, answer) {
   if (b.length <= 5) return distance <= 1;
   if (b.length <= 10) return distance <= 2;
   return distance <= 3;
+}
+
+function matchesNameOrAlias(guess, fullName, aliases) {
+  if (isCloseEnough(guess, fullName)) return true;
+
+  if (!aliases) return false;
+
+  const aliasList = aliases
+    .split(",")
+    .map(a => a.trim())
+    .filter(Boolean);
+
+  return aliasList.some(alias => isCloseEnough(guess, alias));
 }

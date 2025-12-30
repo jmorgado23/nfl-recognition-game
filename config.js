@@ -18,9 +18,9 @@ window.CONFIG = {
   shareUrl: "https://nflrecognitiongame.com",
 
   endMessages: [
-    { min: 160, text: "You really know your NFL." },
-    { min: 120, text: "Solid — but you missed some legends." },
-    { min: 80,  text: "You know the faces. The names are harder." },
+    { min: 16, text: "You really know your NFL." },
+    { min: 12, text: "Solid — but you missed some legends." },
+    { min: 8,  text: "You know the faces. The names are harder." },
     { min: 0,   text: "That was rough. Time to brush up on NFL history." }
   ],
 

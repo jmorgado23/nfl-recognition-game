@@ -1,12 +1,12 @@
 window.CONFIG = {
-  siteName: "NBA Recognition Game",
+  siteName: "NFL Recognition Game",
 
-  title: "NBA Recognition Game",
-  subtitle: "How well do you recognize NBA players?",
+  title: "NFL Recognition Game",
+  subtitle: "How well do you recognize NFL players?",
 
-  description: "Test how well you recognize NBA players. One attempt per face.",
+  description: "Test how well you recognize NFL players. One attempt per face.",
 
-  datasetUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYQt_cDhvn_wrz5Kaonhlx_BKEaD9dSdEAYpjWvnGVngn0HN7B0FoRRAuXXzWrLCy1rh3VStPCg-2_/pub?output=csv", 
+  datasetUrl: "", // we’ll add this next
 
   totalPerRound: 20,
   pointsPerCorrect: 10,
@@ -14,18 +14,18 @@ window.CONFIG = {
   itemLabel: "Player",
 
   shareTemplate:
-    "I scored {score} / {max} on NBA Recognition Game. Can you beat me?",
-  shareUrl: "https://nbarecognitiongame.com",
+    "I scored {score} / {max} on NFL Recognition Game. Can you beat me?",
+  shareUrl: "https://nflrecognitiongame.com",
 
   endMessages: [
-    { min: 160, text: "You really know your NBA." },
+    { min: 160, text: "You really know your NFL." },
     { min: 120, text: "Solid — but you missed some legends." },
-    { min: 80,  text: "You know the faces. The names are tougher." },
-    { min: 0,   text: "That was rough. Time to brush up on NBA history." }
+    { min: 80,  text: "You know the faces. The names are harder." },
+    { min: 0,   text: "That was rough. Time to brush up on NFL history." }
   ],
 
   background: {
-    start: "#fff1e6",
-    end: "#ffd8b5"
+    start: "#e8f5e9",
+    end: "#c8e6c9"
   }
 };

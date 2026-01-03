@@ -41,11 +41,18 @@ function parseCSV(csv) {
 const pick = (a,n) => [...a].sort(()=>Math.random()-0.5).slice(0,n);
 
 function buildRound() {
-  return [
-    ...pick(all.filter(x=>x.conf===5),6),
-    ...pick(all.filter(x=>x.conf===4),8),
-    ...pick(all.filter(x=>x.conf<=3),6)
-  ].sort(()=>Math.random()-0.5);
+  const anchors = pick(all.filter(x => x.conf === 5), 6);
+  const traps = pick(all.filter(x => x.conf === 4), 8);
+  const pressure = pick(all.filter(x => x.conf <= 3), 6);
+
+  let combined = [...anchors, ...traps, ...pressure];
+
+  if (combined.length < TOTAL) {
+    const remaining = all.filter(x => !combined.includes(x));
+    combined = combined.concat(pick(remaining, TOTAL - combined.length));
+  }
+
+  return combined.slice(0, TOTAL).sort(() => Math.random() - 0.5);
 }
 
 function startRound() {
